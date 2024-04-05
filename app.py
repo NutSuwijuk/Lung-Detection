@@ -1,16 +1,22 @@
-from flask import Flask,render_template, request
+from flask import Flask,render_template, request, redirect, url_for, session
+from flask_mysqldb import MySQL
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
+app.secret_key = 'your-secret-key'
+
 class_names = ['COVID2_CT', 'Normal_CT', 'Cancer_CT', 'Pneumonia_CT']
 model = load_model('Xception_Model.hdf5')
 
 # Home
 @app.route('/')
 def index():
-     return render_template("home.html")
+     if 'email' in session:
+          return render_template("home.html", username = session['email'])
+     else:
+          return render_template("home.html")
 
 # Update
 @app.route('/update')
@@ -55,16 +61,84 @@ def about():
 def profile():
      return render_template("profile.html")
 
+### MySQL Configuration
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'flask_users'
+
+mysql = MySQL(app)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form["email"]
+        pwd = request.form["password"]
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT email, password FROM user_list WHERE email = %s", (email,))
+        user = cur.fetchone()
+        cur.close()
+        if user and pwd == user[1]:
+            session['email'] = user[0]
+            return redirect(url_for('home'))
+        else:
+            return render_template('login.html', error='Invalid email or password')
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form["username"]
+        email = request.form["email"]
+        pwd = request.form["password"]
+        gender = request.form["gender"]
+        
+        # Check if the username or email already exists
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM user_list WHERE username = %s OR email = %s", (username, email))
+        existing_user = cur.fetchone()
+        cur.close()
+
+        if existing_user:
+            return render_template('register.html', error='Username or email already exists')
+
+        # If username and email are unique, proceed with registration
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO user_list (username, email, password, gender) VALUES (%s, %s, %s, %s)", (username, email, pwd, gender))
+        mysql.connection.commit()
+        cur.close()
+        
+        return redirect(url_for('home'))
+    return render_template('register.html')
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    return redirect(url_for("home"))
+
 # SignIn
 @app.route('/signin')
 def signin():
-     return render_template("signin.html")
+     if request.method == 'POST':
+          username = request.form['username']
+          pwd = request.form['password']
+          cur = mysql.connection.cursor()
+          cur.execute(f"select username, password from tbl_users where username = '{username}'")
+          user = cur.fetchone()
+          cur.close()
+          if user and pwd == user[1]:
+               session['username'] = user[0]
+               return render_template(url_for('home'))
+          else:
+               return render_template("signin.html", error = 'Invalid username or password')
 
 # Register
-@app.route('/register')
-def register():
-     return render_template("register.html")
+# @app.route('/register')
+# def register():
+#      return render_template("register.html")
  
 if __name__ == "__main__":
-     # app.run(debug=True)
-     app.run()
+     app.run(debug=True)
+     # app.run()

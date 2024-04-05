@@ -4,10 +4,10 @@
 
 <style>
     body {
-      background-image: url('ocean.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed; 
-      background-size: 100% 100%;
+        background-image: url('ocean.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
     }
     </style>
     
@@ -17,7 +17,14 @@
                 <h1 style="color: #ffffff">LUNG DISEASE DETECTION/CLASSIFICATION WEB APPLICATION WITH DEEP LEARNING</h1>
                 <h1 style="color: #ffffff">แอปพลิเคชันเว็บการตรวจหา/จำแนกโรคปอดพร้อมการเรียนรู้เชิงลึก</h1>
             </div>
+            {% if username %}
+                <p>Hello, {{ username }}! You are already logged in.</p>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <p>You are not logged in. Please <a href="/login">Login</a> to access the home page.</p>
+            {% endif %}
+                
         </div>       
     </section>
 
-  {% endblock %}
+{% endblock %}
