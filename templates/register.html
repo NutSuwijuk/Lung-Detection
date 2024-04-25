@@ -2,6 +2,69 @@
 
 {% block content %}
 
-    <h1>LUNG DISEASE DETECTION register</h1>
+    <!-- <h1>LUNG DISEASE DETECTION register</h1> -->
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background: rgb(2,0,36);
+
+        }
+        .heading{
+            color: green;
+        }
+        form{
+            background-color: white;
+            border-radius: 15px;
+        }
+        .w-50{
+            width: 550px !important;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <form action="/register" method="post" class="w-50 mx-auto mt-3 p-5">
+                <h3 >Register</h3>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role:</label>
+                    <select id="role" name="role" class="form-select">
+                        <option value="" selected disabled>Please select</option>
+                        <option value="general">บุคคลทั่วไป</option>
+                        <option value="medical">บุคลากรทางการแพทย์</option>
+                    </select>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <!--
+                    <p class="text-center">or</p>
+                    <button class="btn btn-outline-warning" type="button"><i class="bi bi-facebook"></i>  Continue with Google</button>
+                    -->
+                </div>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

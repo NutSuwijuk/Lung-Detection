@@ -1,51 +1,314 @@
 {% extends "components/header.html" %}
 
 {% block content %}
+    <style>
 
-<style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #23405C;
-      color: #333;
-    }
-  
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-</style>
+        header.masthead {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-top: calc(8rem + 57px);
+            padding-bottom: 8rem;
+            background: no-repeat center center;
+            background-color: #6c757d;
+            background-size: cover;
+            background-attachment: scroll;
+          }
+          header.masthead:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #212529;
+            opacity: 0.5;
+          }
+          header.masthead .page-heading,
+          header.masthead .post-heading,
+          header.masthead .site-heading {
+            color: #fff;
+          }
+          header.masthead .page-heading,
+          header.masthead .site-heading {
+            text-align: center;
+          }
+          header.masthead .page-heading h1, header.masthead .page-heading .h1,
+          header.masthead .site-heading h1,
+          header.masthead .site-heading .h1 {
+            font-size: 3rem;
+          }
+          header.masthead .page-heading .subheading,
+          header.masthead .site-heading .subheading {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin-top: 0.625rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          }
+          header.masthead .post-heading h1, header.masthead .post-heading .h1 {
+            font-size: 2.25rem;
+          }
+          header.masthead .post-heading .meta,
+          header.masthead .post-heading .subheading {
+            line-height: 1.1;
+            display: block;
+          }
+          header.masthead .post-heading .subheading {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0.75rem 0 2rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          }
+          header.masthead .post-heading .meta {
+            font-size: 1.25rem;
+            font-weight: 300;
+            font-style: italic;
+            font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          }
+          header.masthead .post-heading .meta a {
+            color: #fff;
+          }
+          @media (min-width: 992px) {
+            header.masthead {
+              padding-top: 12.5rem;
+              padding-bottom: 12.5rem;
+            }
+            header.masthead .page-heading h1, header.masthead .page-heading .h1,
+            header.masthead .site-heading h1,
+            header.masthead .site-heading .h1 {
+              font-size: 5rem;
+            }
+            header.masthead .post-heading h1, header.masthead .post-heading .h1 {
+              font-size: 3.5rem;
+            }
+            header.masthead .post-heading .subheading {
+              font-size: 1.875rem;
+            }
+          }
+          
+        *,
+        *::before,
+        *::after {
+        box-sizing: border-box;
+        }
 
-        <h1>LUNG DISEASE DETECTION Information</h1>
-    <div class="container">
-        <h4>ปอดอักเสบ</h4>
-        <h4>
-            ปอดอักเสบคือการติดเชื้อที่ทำให้เกิดการอักเสบในถุงลมในหนึ่งหรือทั้งสองปอด สาเหตุสามารถเป็นแบคทีเรีย, เชื้อไวรัส, หรือเชื้อรา 
+        p{
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .justify-content-center {
+            justify-content: center !important;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--bs-body-font-family);
+            font-size: 1.25rem;
+            font-weight: var(--bs-body-font-weight);
+            line-height: var(--bs-body-line-height);
+            color: var(--bs-body-color);
+            text-align: var(--bs-body-text-align);
+            background-color: var(--bs-body-bg);
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .section-heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-top: 3.75rem;
+        }
+
+        .container,
+        .container-fluid,
+        .container-xxl,
+        .container-xl,
+        .container-lg,
+        .container-md,
+        .container-sm {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+        margin-right: auto;
+        margin-left: auto;
+        }
+
+        @media (min-width: 576px) {
+        .container-sm, .container {
+            max-width: 540px;
+        }
+        }
+        @media (min-width: 768px) {
+        .container-md, .container-sm, .container {
+            max-width: 720px;
+        }
+        }
+        @media (min-width: 992px) {
+        .container-lg, .container-md, .container-sm, .container {
+            max-width: 960px;
+        }
+        .px-lg-5 {
+            padding-right: 3rem !important;
+            padding-left: 3rem !important;
+        }
+        }
+        @media (min-width: 1200px) {
+        .container-xl, .container-lg, .container-md, .container-sm, .container {
+            max-width: 1140px;
+        }
+        }
+        @media (min-width: 1400px) {
+        .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+            max-width: 1320px;
+        }
+        }
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+        h2, .h2 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-weight: 800;
+            line-height: 1.2;
+          }
+
+          
+          /* Styles for the container */
+          .col-md-10 {
+              max-width: 800px; /* Set the maximum width */
+              margin: 0 auto; /* Center the container horizontally */
+              padding: 20px; /* Add padding for spacing */
+          }
+          
+          /* Styles for the paragraphs */
+          p {
+              line-height: 1.6; /* Set the line height for readability */
+              margin-bottom: 15px; /* Add space between paragraphs */
+          }
+          
+          /* Styles for the section headings */
+          .section-heading {
+              font-size: 24px; /* Set the font size */
+              margin-bottom: 10px; /* Add space below the heading */
+          }
+          
+          /* Styles for the blockquote */
+          blockquote {
+              font-style: italic; /* Italicize the text */
+              margin: 0; /* Remove default margin */
+              padding: 10px 20px; /* Add padding for the blockquote */
+              background-color: #f7f7f7; /* Set background color */
+              border-left: 5px solid #333; /* Add left border for quote effect */
+          }
+          
+          /* Styles for the image */
+          .img-fluid {
+              max-width: 100%; /* Make the image responsive */
+              height: auto; /* Maintain aspect ratio */
+              margin-bottom: 15px; /* Add space below the image */
+          }
+          
+          /* Styles for the caption */
+          .caption {
+              display: block; /* Display as block element */
+              font-size: 14px; /* Set font size */
+              color: #999; /* Set text color */
+              margin-bottom: 15px; /* Add space below the caption */
+          }
+          
+          /* Styles for the links */
+          a {
+              color: #007bff; /* Set link color */
+              text-decoration: none; /* Remove underline */
+          }
+          
+          a:hover {
+              text-decoration: underline; /* Add underline on hover */
+          }
+          
+          
+
+    </style>
+
+        <!-- Page Header-->
+        <header class="masthead" style="background: #007bff;">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Information</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+
+                        <h2 class="section-heading">ปอดอักเสบ</h2>
+                        <p>
+                            ปอดอักเสบคือการติดเชื้อที่ทำให้เกิดการอักเสบในถุงลมในหนึ่งหรือทั้งสองปอด สาเหตุสามารถเป็นแบคทีเรีย, เชื้อไวรัส, หรือเชื้อรา 
             อาการที่พบบ่อยรวมไปถึงไอ, ไข้, ครั่นเนื้อครั่นใจ, หายใจลำบาก, และเจ็บหน้าอก การวินิจฉัยมักประกอบด้วยการตรวจร่างกาย, รังสี X-ray ของหน้าอก, และบางครั้งการตรวจเลือด การรักษาอาจรวมถึงการใช้ยาปฏิชีวนะ (สำหรับปอดอักเสบที่เกิดจากแบคทีเรีย), ยาต้านไวรัส, พักผ่อน, และดื่มน้ำ มาตรการป้องกันรวมถึงการฉีดวัคซีน (เช่น วัคซีนป้องกันโรคปอดอักเสบ), รักษาระดับความสะอาดที่ดี, และหลีกเลี่ยงการสูบบุหรี่
-        </h4>
-    </div>
 
-    <div class="container">
-        <h4>มะเร็งปอด</h4>
-        <h4>
-            มะเร็งปอดเกิดขึ้นเมื่อเซลล์ผิดปกติเจริญเติบโตอย่างไม่สมดุลในปอด 
+                        </p>     
+                        
+                        <h2 class="section-heading">มะเร็งปอด</h2>
+                        <p>
+                            มะเร็งปอดเกิดขึ้นเมื่อเซลล์ผิดปกติเจริญเติบโตอย่างไม่สมดุลในปอด 
             การสูบบุหรี่เป็นสาเหตุหลัก แต่การสัมผัสกับกรดไร้ดอน, แอสเบสโตส, และสารเคมีอื่นๆ ก็มีส่วนเสริมสำคัญ 
             อาการอาจรวมถึงไอติดต่อ, เจ็บหน้าอก, หายใจลำบาก, ไอเลือด, และการลดน้ำหนักโดยไม่ชัดเจน การวินิจฉัยเกี่ยวข้องกับการทดสอบภาพรังสี (CT scan, PET scan), การทำตัวชิ้นเนื้อ, และบางครั้งการทดสอบโมเลกุล ตัวเลือกในการรักษาขึ้นอยู่กับประเภทและระยะของมะเร็งและอาจรวมถึงการผ่าตัด, เคมีบำบัด, รักษาด้วยรังสี, การรักษาที่เป็นเป้าหมาย, และการรักษาด้วยสารป้องกันภูมิคุ้มกัน การเลิกสูบบุหรี่และการหลีกเลี่ยงควันมอซอนเป็นสิ่งสำคัญสำหรับการป้องกัน
-        </h4>
-    </div>
 
-    <div class="container">
-        <h4>COVID-19</h4>
-        <h4>
-            COVID-19 ซึ่งเกิดจากไวรัสโคโรนาชนิดใหม่ SARS-CoV-2 มีผลกระทบต่อระบบทางเดินหายใจโดยหลัก 
+                        </p>
+
+                        <h2 class="section-heading">COVID-19</h2>
+                        <p>
+                            COVID-19 ซึ่งเกิดจากไวรัสโคโรนาชนิดใหม่ SARS-CoV-2 มีผลกระทบต่อระบบทางเดินหายใจโดยหลัก 
             อาการสามารถแตกต่างได้ตั้งแต่เบา (ไข้, ไอ, อ่อนเพลีย) ไปจนถึงรุนแรง (หายใจลำบาก, ปอดอักเสบ, อาการขาดอากาศทันที) 
             การวินิจฉัยเกี่ยวข้องกับการทดสอบ PCR หรือการทดสอบหลั่งภูมิต้านทานอย่างรวดเร็ว การจัดการขึ้นอยู่กับความรุนแรงของอาการและอาจรวมถึงการดูแลระยะสัมพันธ์ (พักผ่อน, ดื่มน้ำ), การรักษาด้วยออกซิเจน, ยาต้านไวรัส (เช่น remdesivir), และสตีรอยด์ป้องกันอักเสบ การฉีดวัคซีน, การสวมหน้ากาก, การรักษาความสะอาดของมือและการรักษาระยะห่างทางสังคมเป็นสิ่งสำคัญสำหรับการป้องกัน
-        </h4>
-    </div>
 
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                let scrollPos = 0;
+                const mainNav = document.getElementById('mainNav');
+                const headerHeight = mainNav.clientHeight;
+                window.addEventListener('scroll', function() {
+                    const currentTop = document.body.getBoundingClientRect().top * -1;
+                    if ( currentTop < scrollPos) {
+                        // Scrolling Up
+                        if (currentTop > 0 && mainNav.classList.contains('is-fixed')) {
+                            mainNav.classList.add('is-visible');
+                        } else {
+                            console.log(123);
+                            mainNav.classList.remove('is-visible', 'is-fixed');
+                        }
+                    } else {
+                        // Scrolling Down
+                        mainNav.classList.remove(['is-visible']);
+                        if (currentTop > headerHeight && !mainNav.classList.contains('is-fixed')) {
+                            mainNav.classList.add('is-fixed');
+                        }
+                    }
+                    scrollPos = currentTop;
+                });
+            })
+        </script>
 {% endblock %}
