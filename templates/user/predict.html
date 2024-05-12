@@ -1,0 +1,349 @@
+{% extends "components/header.html" %}
+
+{% block content %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background: #1A3454;
+        }
+
+        :root {
+            --blue: #0071FF;
+            --light-blue: #B6DBF6;
+            --dark-blue: #005DD1;
+            --grey: #f2f2f2;
+        }
+        
+        
+        .container-upload {
+            max-width: 80px;
+            width: 80%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 30px;
+        }
+        .img-area {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            background: var(--grey);
+            margin-bottom: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .img-area .icon {
+            font-size: 100px;
+        }
+        .img-area h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        .img-area p {
+            color: #999;
+        }
+        .img-area p span {
+            font-weight: 600;
+        }
+        .img-area img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 100;
+        }
+        .img-area::before {
+            content: attr(data-img);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            color: #fff;
+            font-weight: 500;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: all .3s ease;
+            z-index: 200;
+        }
+        .img-area.active:hover::before {
+            opacity: 1;
+        }
+        .select-image {
+            display: block;
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 15px;
+            background: var(--blue);
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .select-image:hover {
+            background: var(--dark-blue);
+        }
+        .predict-image {
+            display: block;
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 15px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+      /*---------------------------------------
+    TOPICS              
+    -----------------------------------------*/
+
+        .custom-block {
+            background-color: #ffffff;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            padding: 10px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .custom-block-result {
+            background-color: #003362;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .custom-block > a {
+            width: 100%;
+        }
+
+        .custom-block-image {
+            display: block;
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            margin-top: 35px;
+        }
+
+        .custom-block .rounded-pill {
+            border-radius: 5px !important;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            line-height: 20px;
+        }
+
+        .custom-block-overlay {
+            height: 100%;
+            min-height: 350px;
+            padding: 0;
+        }
+
+        .custom-block-overlay > a {
+            height: 100%;
+        }
+
+        .custom-block-overlay .custom-block-image {
+            border-radius: 20px;
+            display: block;
+            height: 100%;
+            margin-top: 0;
+        }
+
+        .custom-block-overlay-text {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            left: 0;
+            padding: 30px;
+        }
+
+        .result-score {
+            display: grid;
+            place-content: center;  
+            width: 12rem;
+            margin-inline: auto;
+            background: #4490e3 ;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+        }
+        
+        .result-score span {
+            display: block;
+            font-size: 2rem; 
+            font-weight: 600;
+            line-height: 1;
+            color: #ffffff; 
+        }
+        
+        .result-rank {
+            padding: 10px;
+            color: #ffffff;
+            font-size: 1.75rem ;
+            font-weight: 700;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.5rem;
+          }
+        
+        .demo {
+            width: 100%;
+            height: 80%;
+            border: 1px solid #9CB8DD;
+            border-collapse: collapse;
+            padding: 5px;
+            
+        }
+    
+        .demo th {
+            border: 1px solid #9CB8DD;
+            text-align: center;
+            padding: 5px;
+            background: #F0F0F0;
+        }
+    
+        .demo td {
+            border: 1px solid #9CB8DD;
+            text-align: center;
+            /* padding: 5px; */
+            color: #fff;
+            background: #4490e3;
+        }
+    </style>
+
+      <div class="container">
+        <div class="row justify-content-center">
+            <h1 class="text-white text-center mb-3">Predict</h1>
+          <div class="col-lg-6 col-12">
+            
+            <div class="custom-block bg-white shadow-lg">
+              <div>
+                <div>
+                  <h4 class="text-center mb-2">Upload Files</h4>
+                </div>
+              </div>
+              <div id="start">
+                
+                
+                <div class="mb-3">
+                    <form class="file-form" action="/predict" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="file" id="file" accept="image/*" name="file" hidden onchange="previewImage(this)">
+                            <input type="hidden" name="datetime" value="{{ datetime  }}">
+                            <div class="img-area" ata-img="">
+                                <i class="bx bxs-cloud-upload icon"></i>
+                                <h3>Upload Image</h3>
+                                <!-- 
+                                <div id="img-preview" class="img-preview" src="#" alt="Image Preview">
+                                    <img id="img-preview" class="img-preview" src="#" alt="Image Preview" >
+                                </div>
+                            -->
+                            </div>
+                            <label for="file" class="select-image btn btn-primary">Select Image</label>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="predict-image btn btn-success btn-lg">Predict</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+            <div class="custom-block-result custom-block-overlay">
+                <div class="results grid-flow" data-spacing="large">
+                    <div class="grid-flow mb-4">
+                      <p class="result-rank text-center">Detection Result</p>
+                      
+                    </div>
+                    
+                </div>
+                <table class="demo">
+                        <thead>
+                            <tr>
+                                <th>Suspected Condition</th>
+                                <th>Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>&nbsp;<strong>Normal</strong></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;<strong>Cancer</strong></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;<strong>Covid-19</strong></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;<strong>Pneumonia</strong></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+              </div>
+            </div>
+        </div>
+      </div>
+
+        </div>
+      </div>
+
+
+    <script>
+        // JavaScript function to preview selected image
+        function previewImage(input) {
+            const imgArea = document.querySelector('.img-area');
+            imgArea.innerHTML = ''; // Clear any existing preview
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgPreview = document.createElement('img');
+                    imgPreview.classList.add('img-preview');
+                    imgPreview.src = e.target.result;
+
+                    // Append the image preview to the imgArea
+                    imgArea.appendChild(imgPreview);
+                };
+                reader.readAsDataURL(input.files[0]); // Read the selected file as data URL
+            }
+        }
+    </script>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+{% endblock %}
