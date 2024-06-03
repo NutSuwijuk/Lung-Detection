@@ -1,4 +1,5 @@
-{% extends "user/components/header.html" %}
+{% extends "admin/components/admin header.html" %}
+
 
 {% block content %}
     <style>
@@ -253,7 +254,7 @@
                 
                 
                 <div class="mb-3">
-                    <form class="file-form" action="/predict" method="post" enctype="multipart/form-data">
+                    <form class="file-form" action="/admin/predict" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <input type="file" id="file" accept="image/*" name="file" hidden onchange="previewImage(this)">
                             <input type="hidden" name="datetime" value="{{ datetime  }}">

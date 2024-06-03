@@ -1,16 +1,14 @@
-{% extends "components/header.html" %}
+{% extends "admin/components/admin header.html" %}
+
 
 {% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
+    body{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background: #1A3454;
     }
-    
+
     :root {
         --blue: #0071FF;
         --light-blue: #B6DBF6;
@@ -20,8 +18,8 @@
     
     
     .container-upload {
-        max-width: 500px;
-        width: 100%;
+        max-width: 80px;
+        width: 80%;
         background: #fff;
         padding: 30px;
         border-radius: 30px;
@@ -29,9 +27,9 @@
     .img-area {
         position: relative;
         width: 100%;
-        height: 420px;
+        height: 360px;
         background: var(--grey);
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         border-radius: 15px;
         overflow: hidden;
         display: flex;
@@ -88,7 +86,7 @@
     .select-image {
         display: block;
         width: 100%;
-        padding: 16px 0;
+        padding: 8px 0;
         border-radius: 15px;
         background: var(--blue);
         color: #fff;
@@ -104,7 +102,7 @@
     .predict-image {
         display: block;
         width: 100%;
-        padding: 16px 0;
+        padding: 8px 0;
         border-radius: 15px;
         color: #fff;
         font-weight: 500;
@@ -113,69 +111,15 @@
         cursor: pointer;
         transition: all .3s ease;
     }
-
-  /*---------------------------------------
-HERO        
------------------------------------------*/
-    .hero-section {
-        /*
-        background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
-        */
-        background-color: #1A3454;
-        position: relative;
-        overflow: hidden;
-        padding-top: 30px;
-        padding-bottom: 130px;
-    }
-
-    .hero-section .input-group {
-        background-color: #ffffff;
-        border-radius: 100px;
-        padding: 10px 15px;
-    }
-
-    .hero-section .input-group-text {
-        background-color: transparent;
-        border: 0;
-    }
-
-    .hero-section input[type="search"] {
-        border: 0;
-        box-shadow: none;
-        margin-bottom: 0;
-        padding-left: 0;
-    }
-
-    .hero-section button[type="submit"] {
-        background-color: #13547a;
-        border: 0;
-        border-radius: 100px !important;
-        color: #ffffff;
-        max-width: 150px;
-    }
-
   /*---------------------------------------
 TOPICS              
 -----------------------------------------*/
-    .featured-section {
-        /* background-color: var(--secondary-color); */
-        background-color: #1A3454;
-        /* border-radius: 0 0 100px 100px; */
-        padding-bottom: 100px;
-    }
-
-    .featured-section .row {
-        position: relative;
-        bottom: 100px;
-        margin-bottom: -100px;
-    }
-
     .custom-block {
         background-color: #ffffff;
         border-radius: 20px;
         position: relative;
         overflow: hidden;
-        padding: 30px;
+        padding: 10px;
         transition: all 0.3s ease;
         height: 100%;
     }
@@ -197,7 +141,7 @@ TOPICS
     .custom-block-image {
         display: block;
         width: 100%;
-        height: 200px;
+        height: 100px;
         object-fit: cover;
         margin-top: 35px;
     }
@@ -257,7 +201,7 @@ TOPICS
     }
     
     .result-rank {
-        padding: 30px;
+        padding: 10px;
         color: #ffffff;
         font-size: 1.75rem ;
         font-weight: 700;
@@ -269,16 +213,18 @@ TOPICS
         font-size: 1.5rem;
       }
     
-      .demo {
+    .demo {
         width: 100%;
-        height: 100%;
+        height: 80%;
         border: 1px solid #9CB8DD;
         border-collapse: collapse;
         padding: 5px;
+        
     }
 
     .demo th {
         border: 1px solid #9CB8DD;
+        text-align: center;
         padding: 5px;
         background: #F0F0F0;
     }
@@ -286,31 +232,20 @@ TOPICS
     .demo td {
         border: 1px solid #9CB8DD;
         text-align: center;
-        padding: 5px;
-        background: #9AC7D0;
+        /* padding: 5px; */
+        color: #fff;
+        background: #4490e3;
     }
 </style>
-    <section
-      class="hero-section d-flex justify-content-center align-items-center"
-      id="section_1"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-12 mx-auto">
-            <h1 class="text-white text-center">Predict</h1>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="featured-section">
       <div class="container">
         <div class="row justify-content-center">
+            <h1 class="text-white text-center mb-3">Prediction</h1>
           <div class="col-lg-6 col-12">
             <div class="custom-block bg-white shadow-lg">
               <div>
                 <div>
-                  <h5 class="text-center mb-2">Upload Files</h5>
+                  <h5 class="text-center mb-2">Upload File</h5>
                 </div>
               </div>
               <div id="start">
@@ -336,7 +271,7 @@ TOPICS
                 </div>
 
               </div>
-              <a href="{{ url_for('predict') }}" class="predict-image btn btn-success btn-lg">Predict again</a>
+              <a href="{{ url_for('adminPredict') }}" class="predict-image btn btn-success btn-lg">Predict again</a>
             </div>
           </div>
 
@@ -345,35 +280,35 @@ TOPICS
                 <div class="results grid-flow" data-spacing="large">
                     <div class="grid-flow mb-4">
                       <p class="result-rank text-center">Detection Result</p>
-                      <h1 class="section-title text-center">Suspected Condition</h1>
+                      <!-- <h1 class="section-title text-center">Suspected Condition</h1>
                       <p class="result-score"><span>{{ predictions.class1 }}</span></p>
                       <h1 class="section-title text-center">Accuracy</h1>
-                      <p class="result-score"><span>{{ predictions.prob1 }}%</span></p>
+                      <p class="result-score"><span>{{ predictions.prob1 }}%</span></p> -->
                     </div>
                 </div>
                 <table class="demo">
                     <thead>
                         <tr>
                             <th>Suspected Condition</th>
-                            <th>Accuracy</th>
+                            <th>Probability</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>&nbsp;A</td>
-                            <td>&nbsp;1</td>
+                            <td>&nbsp;<strong>{{ predictions.class1 }}</strong></td>
+                            <td>&nbsp;<strong>{{ predictions.prob1 }} %</strong></td>
                         </tr>
                         <tr>
-                            <td>&nbsp;B</td>
-                            <td>&nbsp;2</td>
+                            <td>&nbsp;<strong>{{ predictions.class2 }}</strong></td>
+                            <td>&nbsp;<strong>{{ predictions.prob2 }} %</strong></td>
                         </tr>
                         <tr>
-                            <td>&nbsp;C</td>
-                            <td>&nbsp;3</td>
+                            <td>&nbsp;<strong>{{ predictions.class3 }}</strong></td>
+                            <td>&nbsp;<strong>{{ predictions.prob3 }} %</strong></td>
                         </tr>
                         <tr>
-                            <td>&nbsp;D</td>
-                            <td>&nbsp;4</td>
+                            <td>&nbsp;<strong>{{ predictions.class4 }}</strong></td>
+                            <td>&nbsp;<strong>{{ predictions.prob4 }} %</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -381,11 +316,10 @@ TOPICS
             </div>
         </div>
       </div>
-    </section>
+
 
         </div>
       </div>
-    </section>
 
     <script>
         const selectImage = document.querySelector('.select-image');
@@ -417,7 +351,5 @@ TOPICS
     })
         </script>
 
-        <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% endblock %}

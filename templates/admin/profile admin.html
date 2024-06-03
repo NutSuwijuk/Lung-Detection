@@ -1,8 +1,7 @@
 {% extends "admin/components/admin header.html" %}
 
 {% block content %}
-<!-- Bootstrap CSS for styling -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
@@ -129,10 +128,10 @@
                         href="#account-general">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
                         href="#account-dashboard">Dashboard</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" 
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
                         href="#account-user-history">User History</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" 
-                        href="#account-new-update">News Update</a>
+                    <!-- <a class="list-group-item list-group-item-action" data-toggle="list" 
+                        href="#account-new-update">News Update</a> -->
                 </div>
             </div>
             <div class="col-md-9">
@@ -144,7 +143,7 @@
                                 <label class="form-label">Username</label>
                                 <input type="text" class="form-control mb-1" value="{{ user[3] }}">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">E-mail</label>
                                 <input type="text" class="form-control mb-1" value="{{ user[1] }}">
@@ -161,36 +160,33 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Role</label>
-                                <input type="text" class="form-control" value="{{ user[5] }}">
+                                <input type="text" class="form-control" value="admin">
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="account-dashboard">
-
-
-
                         <div class="row justify-content-center">
                             <div class="col-md-4">
                                 <div class="card mb-5">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                        <div
-                                            class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Account </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ account[0] }}</div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <b>Account </b></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ account[0] }}
+                                                </div>
+                                                <!-- <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div> -->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                    </div>
                                     <div class="card-body">
-                                        <div
-                                            class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Prediction Times</div>
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            <b>Prediction Times</b></div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ prediction[0] }}</div>
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        <!-- <i class="fas fa-calendar fa-2x text-gray-300"></i> -->
                                     </div>
                                 </div>
                             </div>
@@ -199,29 +195,17 @@
                             <!-- Bar Chart-->
                             <div class="col-md-8">
                                 <canvas id="chat_result"></canvas>
-                            </div> 
+                            </div>
                         </div>
-                        <!-- <h4>Select Orders by Time Range</h4>
-                        <div class="ms-auto">
-                            <form action="/data_admin" method="POST" >
-                                <label for="time_range">Select Time Range:</label>
-                                <select name="time_range" id="time_range">
-                                    <option value="1">Past 1 Day</option>
-                                    <option value="3">Past 3 Days</option>
-                                    <option value="7">Past 7 Days</option>
-                                </select>
-                                <button type="submit">Apply</button>
-                            </form>
-                        </div> -->
-                    <h4>Select Orders by Time Range</h4>
-                    <form action="/admin/profile" method="POST">
-                        <input type="radio" id="9days" name="time_range" value="9" checked>
-                        <label for="5days">Last 9 Days</label><br>
-                        <input type="radio" id="11days" name="time_range" value="11">
-                        <label for="7days">Last 11 Days</label><br>
-                        <button type="submit">Apply</button>
-                    </form>
-                    
+
+                        <form id="timeRangeForm" action="/admin/profile" method="POST">
+                            <select id="timeRangeSelect" name="time_range">
+                                <option value="7">Last 7 Days </option>
+                                <option value="30">Last 30 Days </option>
+                            </select>
+                            <button type="submit">Apply</button>
+                        </form>
+
                         <table id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
@@ -231,7 +215,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for data_table  in data_table %}
+                                {% for data_table in data_table %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
                                     <td>{{ data_table[2] }}</td>
@@ -241,6 +225,38 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="tab-pane fade" id="account-user-history">
+                        <h4>User History</h4>
+                        <table id="first-table" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Date</th>
+                                    <th>Username</th>
+                                    <th>Detection Result</th>
+                                    <th>Image Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for all_user in all_user %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ all_user[1] }}</td>
+                                    <td>{{ all_user[2] }}</td>
+                                    <td>{{ all_user[3] }}</td>
+                                    <td>{{ all_user[4] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="account-new-update">
+                        <h4>account-new-update</h4>
+                        
+                    </div>
+
                 </div>
             </div>
 
@@ -268,8 +284,35 @@
     $(document).ready(function () {
         $('#example').DataTable();
     });
+
+    // Initialize first DataTable
+    $(document).ready(function () {
+        $('#first-table').DataTable();
+    });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const timeRangeSelect = document.getElementById('timeRangeSelect');
+        const selectedTimeRangeInput = document.getElementById('selectedTimeRangeInput');
+
+        // Get the selected time range value from the hidden input field
+        const selectedTimeRange = selectedTimeRangeInput.value;
+
+        // Set the selected option in the dropdown based on the value from the input
+        timeRangeSelect.value = selectedTimeRange;
+
+        // Event listener to update the selected time range value in the hidden input on change
+        timeRangeSelect.addEventListener('change', function () {
+            selectedTimeRangeInput.value = this.value;
+        });
+    });
+</script>
+
+
+<!-- Include jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
