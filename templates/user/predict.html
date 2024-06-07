@@ -1,0 +1,250 @@
+{% extends "user/components/header.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        background: #1A3454;
+    }
+
+    .img-area {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        background: #f2f2f2;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .img-area .icon {
+        font-size: 100px;
+    }
+
+    .img-area h3 {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 6px;
+    }
+    
+    .img-area p {
+        color: #999;
+    }
+
+    .img-area p span {
+        font-weight: 600;
+    }
+
+    .img-area img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 100;
+    }
+
+    .img-area::before {
+        content: attr(data-img);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .5);
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        opacity: 0;
+        transition: all .3s ease;
+        z-index: 200;
+    }
+
+    .img-area.active:hover::before {
+        opacity: 1;
+    }
+
+    .select-image {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
+        border-radius: 15px;
+        background: #0071FF;
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+    .select-image:hover {
+        background: #005DD1;
+    }
+
+    .predict-image {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
+        border-radius: 15px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+    .custom-block {
+        background-color: #ffffff;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        padding: 10px;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .custom-block-result {
+        background-color: #003362;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        padding: 30px;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .custom-block-overlay {
+        height: 100%;
+        min-height: 350px;
+        padding: 0;
+    }
+
+    .result-rank {
+        padding: 10px;
+        color: #ffffff;
+        font-size: 1.75rem;
+        font-weight: 700;
+    }
+
+    .demo {
+        width: 100%;
+        height: 80%;
+        border: 1px solid #9CB8DD;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    .demo th {
+        border: 1px solid #9CB8DD;
+        text-align: center;
+        padding: 5px;
+        background: #F0F0F0;
+    }
+
+    .demo td {
+        border: 1px solid #9CB8DD;
+        text-align: center;
+        color: #fff;
+        background: #4490e3;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="text-white text-center mb-3">Prediction</h1>
+        <div class="col-lg-6 col-12">
+            <div class="custom-block bg-white shadow-lg">
+                <div>
+                    <div>
+                        <h4 class="text-center mb-2">Upload File</h4>
+                    </div>
+                </div>
+                <div id="start">
+                    <div class="mb-3">
+                        <form class="file-form" action="/predict" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <input type="file" id="file" accept="image/*" name="file" hidden
+                                    onchange="previewImage(this)">
+                                <input type="hidden" name="datetime" value="{{ datetime  }}">
+                                <div class="img-area" ata-img="">
+                                    <i class="bx bxs-cloud-upload icon"></i>
+                                    <h3>Upload Image</h3>
+                                </div>
+                                <label for="file" class="select-image btn btn-primary">Select Image</label>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="predict-image btn btn-success btn-lg">Predict</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+            <div class="custom-block-result custom-block-overlay">
+                <div class="results grid-flow" data-spacing="large">
+                    <div class="grid-flow mb-4">
+                        <p class="result-rank text-center">Detection Result</p>
+                    </div>
+                </div>
+                <table class="demo">
+                    <thead>
+                        <tr>
+                            <th>Suspected Condition</th>
+                            <th>Probability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&nbsp;<strong>Normal</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;<strong>Cancer</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;<strong>Covid-19</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;<strong>Pneumonia</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(input) {
+        const imgArea = document.querySelector('.img-area');
+        imgArea.innerHTML = '';
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgPreview = document.createElement('img');
+                imgPreview.classList.add('img-preview');
+                imgPreview.src = e.target.result;
+                imgArea.appendChild(imgPreview);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+{% endblock %}

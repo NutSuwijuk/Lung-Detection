@@ -1,0 +1,88 @@
+{% extends "admin/components/admin header.html" %}
+
+{% block content %}
+
+<style>
+  header.masthead {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: no-repeat center center;
+    background-color: #1A3454;
+    background-size: cover;
+    background-attachment: scroll;
+  }
+
+  header.masthead .page-heading {
+    color: #fff;
+    text-align: center;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .justify-content-center {
+    justify-content: center !important;
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3.75rem;
+  }
+</style>
+
+<header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>About Me</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <img src="/static/AboutMe.png" alt="AboutMe" width="100%" style="border-radius: 5%">
+        <h4 class="section-heading">เว็บไซต์เราให้บริการอะไร?</h4>
+        <p>
+          เว็บไซต์นี้ให้สามารถผู้ใช้ในการทำนายความเสี่ยงโรคที่เกี่ยวกับปอดด้วยตนเองได้เบื้องต้น โดยใช้ไฟล์ภาพ CT-scan
+          ซึ่งผลลัพธ์ในการทำนายจะครอบคลุมทั้งหมด 4 ผลลัพธ์ ได้แก่ โรคโควิด-19 โรคปอดอักเสบ โรคมะเร็งปอด และปอดปกติ
+        </p>
+        <p>
+          นอกจากนี้ ในเว็บไซต์เรายังมีการให้ข้อมูลเกี่ยวกับโรคมะเร็งปอด โรคโควิด-19 และโรคปอดอักเสบ
+          ให้ผู้ใช้เข้าใจข้อมูลเกี่ยวกับโรคเหล่านี้
+        </p>
+        <h4 class="section-heading">ที่มาของเว็บไซต์เรา</h4>
+        <p>
+          โรคมะเร็งปอด โรคโควิด-19 และปอดอักเสบ
+          เป็นกลุ่มโรคที่เกี่ยวกับอาการผิดปกติของปอดที่ทําให้คนไทยเสียชีวิตจํานวนมาก
+          ซึ่งส่วนใหญ่ผู้ป่วยโรคเหล่านี้จะได้รับการทำนายหรือพบโรคช้า ยิ่งในสถานการณ์ปัจจุบันโรคโควิด-19
+          ยังคงระบาดทั่วโลก ผู้ป่วยโรคโควิด-19 รุนแรงจะมีอาการผิดปกติเกี่ยวกับปอด
+          ดังนั้นการวินิจฉัยต้องมีความแม่นยําและรวดเร็ว โดยปกติวิธีการเอกซเรย์ทรวงอกซึ่งเป็นวิธีที่สะดวก และปลอดภัย
+          โดยปกติแพทย์จะทําหน้าที่วินิจฉัยโรคด้วยตนเอง ทําให้ภาระงานเพิ่มขึ้น
+          เพื่อแก้ปัญหาเหล่านี้คณะผู้จัดทําจึงคิดว่าควรจะมีเครื่องมือที่สามารถทํานายโรคเกี่ยวกับปอดได้เบื้องต้น
+          คณะผู้จัดทำจึงได้ใช้เทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน
+          เนื่องจากเป็นวิธีการที่นิยมนํามาใช้จําแนกความ แตกต่างของรูปภาพได้มีประสิทธิภาพและมีความแม่นยําสูง
+        </p>
+        <h4 class="section-heading">เรามีวิธีการตรวจอย่างไร?</h4>
+        <p>
+          ในการตรวจเพื่อทำนายโรคปอด เราจะให้ท่านแนบรูป CT-scan ซึ่งเราจะนำรูป CT-scan นั้นมาเข้าโมเดลเพื่อทำนายโรคปอด
+          โดยเรามีการนำความรู้ของเทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน
+          ซึ่งเราจะทำการเปรียบเทียบ 5 โมเดล ระหว่าง Xception, DenseNet 121, ResNet 50, Inception V3 และ VGG 19
+          ว่าโมเดลไหนมีความแม่นยำ และเราจะรูป CT-scan ที่ท่านกรอกเข้ามา นำมาทดสอบกับโมเดล Xception ที่มีความแม่นยำ
+          99.72% เพื่อทำนายโรคปอดต่อไป
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

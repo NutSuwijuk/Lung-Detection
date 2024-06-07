@@ -1,0 +1,57 @@
+{% extends "admin/components/admin header.html" %}
+
+{% block content %}
+
+<style>
+  body {
+    background: #1A3454;
+  }
+
+  .text-white-75 {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  hr.divider {
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #4490e3;
+    opacity: 1;
+  }
+
+  header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+
+  header.masthead h1,
+  header.masthead .h1 {
+    font-size: 2.25rem;
+  }
+</style>
+
+<header class="masthead">
+  <div class="container px-4 px-lg-5 ">
+    <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+      <div class="col-lg-8 align-self-end">
+        <h1 class="text-white font-weight-bold">Lung Disease Detection/Classification</h1>
+        <h1 class="text-white font-weight-bold">Web Application With Deep Learning</h1>
+        <hr class="divider" />
+      </div>
+      <div class="col-lg-8 align-self-baseline">
+
+        <h5 class="text-white mb-5">เว็บแอปพลิเคชันการตรวจหา/จำแนกโรคปอดพร้อมการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์
+        </h5>
+      </div>
+      <div class="nav-item mx-2">
+        <a class="btn btn-primary btn-xl" href="{{url_for('adminInformation')}}">Information</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% endblock %}
