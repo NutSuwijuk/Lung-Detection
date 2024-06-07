@@ -314,6 +314,7 @@ def adminProfile():
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM `admin` WHERE admin_id = %s", (admin_id,))
         user = cur.fetchone()
+        print(user)
         cur.close()
         username = user[3]
         email = user[1]
@@ -416,12 +417,12 @@ def adminRegister():
         email = request.form['email']
         password = request.form['password']
         username = request.form['username']
-        role = 'admin'
+        role = 'Admin'
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO admin (email, password, username, role) VALUES (%s, %s, %s, %s)", (email, password, username, role))
         mysql.connection.commit()
         cur.close()
-        return render_template(url_for('admin/index'))
+        return redirect(url_for('adminIndex'))
     return render_template('admin/register.html')
 
 if __name__ == "__main__":

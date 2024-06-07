@@ -1,244 +1,88 @@
 {% extends "admin/components/admin header.html" %}
 
-
 {% block content %}
+
 <style>
-    header.masthead {
-        position: relative;
-        margin-bottom: 3rem;
-        padding-top: calc(8rem + 57px);
-        padding-bottom: 8rem;
-        background: no-repeat center center;
-        background-color: #1A3454;
-        background-size: cover;
-        background-attachment: scroll;
-      }
-      header.masthead:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #1A3454;
-        opacity: 0.5;
-      }
-      header.masthead .page-heading,
-      header.masthead .post-heading,
-      header.masthead .site-heading {
-        color: #fff;
-      }
-      header.masthead .page-heading,
-      header.masthead .site-heading {
-        text-align: center;
-      }
-      header.masthead .page-heading h1, header.masthead .page-heading .h1,
-      header.masthead .site-heading h1,
-      header.masthead .site-heading .h1 {
-        font-size: 3rem;
-      }
-      header.masthead .page-heading .subheading,
-      header.masthead .site-heading .subheading {
-        font-size: 1.5rem;
-        font-weight: 300;
-        line-height: 1.1;
-        display: block;
-        margin-top: 0.625rem;
-        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      }
-      header.masthead .post-heading h1, header.masthead .post-heading .h1 {
-        font-size: 2rem;
-      }
-      header.masthead .post-heading .meta,
-      header.masthead .post-heading .subheading {
-        line-height: 1.1;
-        display: block;
-      }
-      header.masthead .post-heading .subheading {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 0.75rem 0 2rem;
-        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      }
-      header.masthead .post-heading .meta {
-        font-size: 1.25rem;
-        font-weight: 300;
-        font-style: italic;
-        font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      }
-      header.masthead .post-heading .meta a {
-        color: #fff;
-      }
-      @media (min-width: 992px) {
-        header.masthead {
-          padding-top: 2.5rem;
-          padding-bottom: 2.5rem;
-        }
-        header.masthead .page-heading h1, header.masthead .page-heading .h1,
-        header.masthead .site-heading h1,
-        header.masthead .site-heading .h1 {
-          font-size: 3rem;
-        }
-        header.masthead .post-heading h1, header.masthead .post-heading .h1 {
-          font-size: 2rem;
-        }
-        header.masthead .post-heading .subheading {
-          font-size: 1.875rem;
-        }
-      }
+  header.masthead {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: no-repeat center center;
+    background-color: #1A3454;
+    background-size: cover;
+    background-attachment: scroll;
+  }
 
-    *,
-    *::before,
-    *::after {
-    box-sizing: border-box;
-    }
+  header.masthead .page-heading {
+    color: #fff;
+    text-align: center;
+  }
 
-    p{
-        margin-top: 0;
-        margin-bottom: 1rem;
-    }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
 
-    .justify-content-center {
-        justify-content: center !important;
-    }
+  .justify-content-center {
+    justify-content: center !important;
+  }
 
-    body {
-        margin: 0;
-        /* font-family: var(--bs-body-font-family);
-        font-size: 1.25rem;
-        font-weight: var(--bs-body-font-weight); */
-        line-height: var(--bs-body-line-height);
-        color: var(--bs-body-color);
-        text-align: var(--bs-body-text-align);
-        background-color: var(--bs-body-bg);
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-
-    .section-heading {
-        font-size: 1.75rem;
-        font-weight: 700;
-        margin-top: 3.75rem;
-    }
-
-    .container,
-    .container-fluid,
-    .container-xxl,
-    .container-xl,
-    .container-lg,
-    .container-md,
-    .container-sm {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * 0.5);
-    padding-left: calc(var(--bs-gutter-x) * 0.5);
-    margin-right: auto;
-    margin-left: auto;
-    }
-
-    @media (min-width: 576px) {
-    .container-sm, .container {
-        max-width: 540px;
-    }
-    }
-    @media (min-width: 768px) {
-    .container-md, .container-sm, .container {
-        max-width: 720px;
-    }
-    }
-    @media (min-width: 992px) {
-    .container-lg, .container-md, .container-sm, .container {
-        max-width: 960px;
-    }
-    .px-lg-5 {
-        padding-right: 3rem !important;
-        padding-left: 3rem !important;
-    }
-    }
-    @media (min-width: 1200px) {
-    .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 1140px;
-    }
-    }
-    @media (min-width: 1400px) {
-    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 1320px;
-    }
-    }
-    .mb-4 {
-        margin-bottom: 1.5rem !important;
-    }
-    h2, .h2 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-weight: 800;
-        line-height: 1.2;
-      }
-
-      
-      /* Styles for the container */
-      .col-md-10 {
-          max-width: 800px; /* Set the maximum width */
-          margin: 0 auto; /* Center the container horizontally */
-          padding: 20px; /* Add padding for spacing */
-      }
-      
-
-
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3.75rem;
+  }
 </style>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="page-heading">
-                          
-                            <h1>About Me</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Main Content-->
-        <main class="mb-4">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                      <img src="/static/AboutMe.png" alt="AboutMe" width="100%" style="border-radius: 5%">
-                      <h4 class="section-heading">เว็บไซต์เราให้บริการอะไร?</h4>
-                        <p>
-                          เว็บไซต์นี้ให้สามารถผู้ใช้ในการทำนายความเสี่ยงโรคที่เกี่ยวกับปอดด้วยตนเองได้เบื้องต้น โดยใช้ไฟล์ภาพ CT-scan ซึ่งผลลัพธ์ในการทำนายจะครอบคลุมทั้งหมด 4 ผลลัพธ์ ได้แก่ โรคโควิด-19 โรคปอดอักเสบ โรคมะเร็งปอด และปอดปกติ 
-                        </p>  
-                        <p>
-                          นอกจากนี้ ในเว็บไซต์เรายังมีการให้ข้อมูลเกี่ยวกับโรคมะเร็งปอด โรคโควิด-19 และโรคปอดอักเสบ ให้ผู้ใช้เข้าใจข้อมูลเกี่ยวกับโรคเหล่านี้
-                        </p>   
-                        
-                        <h4 class="section-heading">ที่มาของเว็บไซต์เรา</h4>
-                        <p>
-                          โรคมะเร็งปอด โรคโควิด-19 และปอดอักเสบ เป็นกลุ่มโรคที่เกี่ยวกับอาการผิดปกติของปอดที่ทําให้คนไทยเสียชีวิตจํานวนมาก ซึ่งส่วนใหญ่ผู้ป่วยโรคเหล่านี้จะได้รับการทำนายหรือพบโรคช้า ยิ่งในสถานการณ์ปัจจุบันโรคโควิด-19 ยังคงระบาดทั่วโลก ผู้ป่วยโรคโควิด-19 รุนแรงจะมีอาการผิดปกติเกี่ยวกับปอด ดังนั้นการวินิจฉัยต้องมีความแม่นยําและรวดเร็ว โดยปกติวิธีการเอกซเรย์ทรวงอกซึ่งเป็นวิธีที่สะดวก และปลอดภัย โดยปกติแพทย์จะทําหน้าที่วินิจฉัยโรคด้วยตนเอง ทําให้ภาระงานเพิ่มขึ้น เพื่อแก้ปัญหาเหล่านี้คณะผู้จัดทําจึงคิดว่าควรจะมีเครื่องมือที่สามารถทํานายโรคเกี่ยวกับปอดได้เบื้องต้น คณะผู้จัดทำจึงได้ใช้เทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน เนื่องจากเป็นวิธีการที่นิยมนํามาใช้จําแนกความ แตกต่างของรูปภาพได้มีประสิทธิภาพและมีความแม่นยําสูง
-                        </p>
 
-                      <!-- <h4>เว็บไซต์เราให้บริการอะไร?</h4>
-                        <p>
-                          เว็บไซต์นี้ให้สามารถผู้ใช้ในการวินิจฉัยความเสี่ยงโรคที่เกี่ยวกับปอดด้วยตนเองได้เบื้องต้น โดยใช้ไฟล์ภาพ CT-scan ซึ่งผลลัพธ์ในการทำนายจะครอบคลุมทั้งหมด 4 ผลลัพธ์ ได้แก่ โรคโควิด-19 โรคปอดอักเสบ โรคมะเร็งปอด และปอดปกติ 
-                        </p>
-                        <p>
-                          นอกจากนี้ ในเว็บไซต์เรายังมีการให้ข้อมูลเกี่ยวกับโรคมะเร็งปอด โรคโควิด-19 และโรคปอดอักเสบ ให้ผู้ใช้เข้าใจข้อมูลเกี่ยวกับโรคเหล่านี้
-                        </p>
+<header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>About Me</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <img src="/static/AboutMe.png" alt="AboutMe" width="100%" style="border-radius: 5%">
+        <h4 class="section-heading">เว็บไซต์เราให้บริการอะไร?</h4>
+        <p>
+          เว็บไซต์นี้ให้สามารถผู้ใช้ในการทำนายความเสี่ยงโรคที่เกี่ยวกับปอดด้วยตนเองได้เบื้องต้น โดยใช้ไฟล์ภาพ CT-scan
+          ซึ่งผลลัพธ์ในการทำนายจะครอบคลุมทั้งหมด 4 ผลลัพธ์ ได้แก่ โรคโควิด-19 โรคปอดอักเสบ โรคมะเร็งปอด และปอดปกติ
+        </p>
+        <p>
+          นอกจากนี้ ในเว็บไซต์เรายังมีการให้ข้อมูลเกี่ยวกับโรคมะเร็งปอด โรคโควิด-19 และโรคปอดอักเสบ
+          ให้ผู้ใช้เข้าใจข้อมูลเกี่ยวกับโรคเหล่านี้
+        </p>
+        <h4 class="section-heading">ที่มาของเว็บไซต์เรา</h4>
+        <p>
+          โรคมะเร็งปอด โรคโควิด-19 และปอดอักเสบ
+          เป็นกลุ่มโรคที่เกี่ยวกับอาการผิดปกติของปอดที่ทําให้คนไทยเสียชีวิตจํานวนมาก
+          ซึ่งส่วนใหญ่ผู้ป่วยโรคเหล่านี้จะได้รับการทำนายหรือพบโรคช้า ยิ่งในสถานการณ์ปัจจุบันโรคโควิด-19
+          ยังคงระบาดทั่วโลก ผู้ป่วยโรคโควิด-19 รุนแรงจะมีอาการผิดปกติเกี่ยวกับปอด
+          ดังนั้นการวินิจฉัยต้องมีความแม่นยําและรวดเร็ว โดยปกติวิธีการเอกซเรย์ทรวงอกซึ่งเป็นวิธีที่สะดวก และปลอดภัย
+          โดยปกติแพทย์จะทําหน้าที่วินิจฉัยโรคด้วยตนเอง ทําให้ภาระงานเพิ่มขึ้น
+          เพื่อแก้ปัญหาเหล่านี้คณะผู้จัดทําจึงคิดว่าควรจะมีเครื่องมือที่สามารถทํานายโรคเกี่ยวกับปอดได้เบื้องต้น
+          คณะผู้จัดทำจึงได้ใช้เทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน
+          เนื่องจากเป็นวิธีการที่นิยมนํามาใช้จําแนกความ แตกต่างของรูปภาพได้มีประสิทธิภาพและมีความแม่นยําสูง
+        </p>
+        <h4 class="section-heading">เรามีวิธีการตรวจอย่างไร?</h4>
+        <p>
+          ในการตรวจเพื่อทำนายโรคปอด เราจะให้ท่านแนบรูป CT-scan ซึ่งเราจะนำรูป CT-scan นั้นมาเข้าโมเดลเพื่อทำนายโรคปอด
+          โดยเรามีการนำความรู้ของเทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน
+          ซึ่งเราจะทำการเปรียบเทียบ 5 โมเดล ระหว่าง Xception, DenseNet 121, ResNet 50, Inception V3 และ VGG 19
+          ว่าโมเดลไหนมีความแม่นยำ และเราจะรูป CT-scan ที่ท่านกรอกเข้ามา นำมาทดสอบกับโมเดล Xception ที่มีความแม่นยำ
+          99.72% เพื่อทำนายโรคปอดต่อไป
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
 
-                        <h4>ที่มาของเว็บไซต์เรา</h4>
-                        <p>
-                          โรคมะเร็งปอด โรคโควิด-19 และปอดอักเสบ เป็นกลุ่มโรคที่เกี่ยวกับอาการผิดปกติของปอดที่ทําให้คนไทยเสียชีวิตจํานวนมาก ซึ่งส่วนใหญ่ผู้ป่วยโรคเหล่านี้จะได้รับการตรวจวินิจฉัยหรือพบโรคช้า ยิ่งในสถานการณ์ปัจจุบันโรคโควิด-19 ยังคงระบาดทั่วโลก ผู้ป่วยโรคโควิด-19 รุนแรงจะมีอาการผิดปกติเกี่ยวกับปอด ดังนั้นการวินิจฉัยต้องมีความแม่นยําและรวดเร็ว โดยปกติวิธีการเอกซเรย์ทรวงอกซึ่งเป็นวิธีที่สะดวก และปลอดภัย โดยปกติแพทย์จะทําหน้าที่วินิจฉัยโรคด้วยตนเอง ทําให้ภาระงานเพิ่มขึ้น เพื่อแก้ปัญหาเหล่านี้คณะผู้จัดทําจึงคิดว่าควรจะมีเครื่องมือที่สามารถทํานายโรคเกี่ยวกับปอดได้เบื้องต้น คณะผู้จัดทำจึงได้ใช้เทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน เนื่องจากเป็นวิธีการที่นิยมนํามาใช้จําแนกความ แตกต่างของรูปภาพได้มีประสิทธิภาพและมีความแม่นยําสูง
-                        </p> -->
-                        <h4 class="section-heading">เรามีวิธีการตรวจอย่างไร?</h4>
-                        <p>
-                          ในการตรวจเพื่อทำนายโรคปอด เราจะให้ท่านแนบรูป CT-scan ซึ่งเราจะนำรูป CT-scan นั้นมาเข้าโมเดลเพื่อทำนายโรคปอด โดยเรามีการนำความรู้ของเทคโนโลยีการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์ โดยใช้โครงข่ายประสาทเทียมแบบคอนโวลูชัน
-                          ซึ่งเราจะทำการเปรียบเทียบโมเดลระหว่าง Xception, DenseNet 121, ResNet 50, Inception V3 และ VGG 19
-                          ว่าโมเดลไหนมีความแม่นยำมากที่สุด และเราจะรูป CT-scan ที่ท่านกรอกเข้ามา นำมาทดสอบกับโมเดลที่มีความแม่นยำมากที่สุดเพื่อทำนายโรคปอดต่อไป
-                    </div>
-                </div>
-            </div>
-        </main>
 {% endblock %}

@@ -1,61 +1,42 @@
 {% extends "admin/components/admin header.html" %}
 
 {% block content %}
+
 <style>
-    *{
+    * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
     }
-    body{
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        background: #1A3454;
 
+    body {
+        background: #1A3454;
     }
-    .heading{
-        color: green;
-    }
-    form{
+
+    form {
         background-color: white;
         border-radius: 15px;
     }
-    .w-50{
+
+    .w-50 {
         width: 550px !important;
     }
 </style>
 
-
 <div class="container">
-    <h1 class="text-center my-3" style="color:rgb(255, 255, 255);">
-        Admin Login
-    </h1>
     <div class="row d-flex justify-content-center">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-            {% with messages=get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            {% for category,message in messages %}
-            <div class="alert alert-{{category}}">
-                <strong>{{message}}</strong>
+        <form action="" method="POST" class="w-50 mx-auto mt-3 p-5">
+            <h3>Admin Login</h3>
+            <div class="my-2">
+                <label for="">Username:</label>
+                <input type="text" name="email" id="email" class="form-control my-1">
             </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-            <div class="card">
-                <div class="card-body">
-                    <form action="" method="POST">
-                        <div class="my-2">
-                            <label for=""><b>Enter Your Username</b></label>
-                            <input type="text" name="email" id="email" class="form-control my-1">
-                        </div>
-                        <div class="my-2">
-                            <label for=""><b>Enter Your Password</b></label>
-                            <input type="password" name="password" id="password" class="form-control my-1">
-                        </div>
-                        <button class="btn btn-success">Login</button>
-                    </form>
-                </div>
+            <div class="my-2">
+                <label for="">Password:</label>
+                <input type="password" name="password" id="password" class="form-control my-1">
             </div>
-        </div>
+            <button class="btn btn-success">Login</button>
+        </form>
     </div>
 </div>
 

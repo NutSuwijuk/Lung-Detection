@@ -1,93 +1,57 @@
 {% extends "user/components/header.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Creative - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap Icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <style>
 
-          body{
-            /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
-            background: #1A3454;
-          }
 
-          .text-white-75 {
-            color: rgba(255, 255, 255, 0.75) !important;
-          }
+<style>
+  body {
+    background: #1A3454;
+  }
 
-          hr.divider {
-            height: 0.2rem;
-            max-width: 3.25rem;
-            margin: 1.5rem auto;
-            background-color: #4490e3;
-            opacity: 1;
-          }
+  .text-white-75 {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
 
-          
-          header.masthead {
-            padding-top: 10rem;
-            padding-bottom: calc(10rem - 4.5rem);
-            /* background: #37517e; */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-          }
-          header.masthead h1, header.masthead .h1 {
-            font-size: 2.25rem;
-          }
+  hr.divider {
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #4490e3;
+    opacity: 1;
+  }
 
-        </style>
-        
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 ">
-                <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Lung Disease Detection/Classification</h1>
-                        <h1 class="text-white font-weight-bold">Web Application With Deep Learning</h1>
+  header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
 
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                    
-                        <h5 class="text-white mb-5">เว็บแอปพลิเคชันการตรวจหา/จำแนกโรคปอดพร้อมการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์</h5>
-                      <!--  
-                          <a class="btn btn-primary btn-xl" href="{{url_for('predict')}}">Predict</a>
-                        -->
-                    </div>
-                    <div class="nav-item mx-2">
-                      <!--
-                      <a class="nav-link" href="{{url_for('information')}}">Information</a>
-                      -->
-                      <a class="btn btn-primary btn-xl" href="{{url_for('information')}}">Information</a>
-                    </div>
-                    <!--
-                    <button href={{url_for('information')}}>Information</button>
-                    -->
-                </div>
+  header.masthead h1,
+  header.masthead .h1 {
+    font-size: 2.25rem;
+  }
+</style>
 
-                
-            </div>
-        </header>
-</body>
-</html>
+<header class="masthead">
+  <div class="container px-4 px-lg-5 ">
+    <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+      <div class="col-lg-8 align-self-end">
+        <h1 class="text-white font-weight-bold">Lung Disease Detection/Classification</h1>
+        <h1 class="text-white font-weight-bold">Web Application With Deep Learning</h1>
+        <hr class="divider" />
+      </div>
+      <div class="col-lg-8 align-self-baseline">
+        <h5 class="text-white mb-5">เว็บแอปพลิเคชันการตรวจหา/จำแนกโรคปอดพร้อมการเรียนรู้เชิงลึกของเครื่องคอมพิวเตอร์
+        </h5>
+      </div>
+      <div class="nav-item mx-2">
+        <a class="btn btn-primary btn-xl" href="{{url_for('information')}}">Information</a>
+      </div>
+    </div>
+  </div>
+</header>
 
 {% endblock %}
